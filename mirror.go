@@ -17,5 +17,5 @@ func mirrorHandler(w http.ResponseWriter, req *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("%s", b)
+	fmt.Printf("%s\n", b)
 }

@@ -9,3 +9,13 @@ A small web server that will just output the body and url of each request to sta
 `$ mirror`
 ##### Request
 `$ curl "http://localhost:12345/some/url" -d 'Hello World' -XPUT`
+##### Output
+```
+PUT /some/url HTTP/1.1
+Host: localhost:12345
+Accept: */*
+Content-Type: application/x-www-form-urlencoded
+User-Agent: curl/7.30.0
+
+Hello World
+```
