@@ -1,5 +1,5 @@
 # mirror
-A small web server that will just output the body and url of each request to standard output
+A small web server that will output any requests against it
 
 ## Install
 `$ go get github.com/fredr/mirror`
