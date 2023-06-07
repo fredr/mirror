@@ -5,11 +5,20 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
+	"os"
 )
 
 func main() {
 	http.HandleFunc("/", mirrorHandler)
-	log.Fatal(http.ListenAndServe(":12345", nil))
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "12345"
+	}
+
+	fmt.Println("Listening to port", port)
+
+	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%v", port), nil))
 }
 
 func mirrorHandler(w http.ResponseWriter, req *http.Request) {
