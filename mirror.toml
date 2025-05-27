@@ -1,0 +1,75 @@
+# Example mirror.toml configuration file
+
+# GET method example
+[endpoint.get-users]
+path = "api/users"
+method = "GET"
+status_code = 200
+response_body = """{"users": [{"id": 1, "name": "John Doe"}, {"id": 2, "name": "Jane Smith"}]}"""
+headers = { Content-Type = "application/json" }
+
+# POST method example
+[endpoint.create-user]
+path = "api/users"
+method = "POST"
+status_code = 201
+response_body = """{"id": 3, "name": "New User", "created": true}"""
+headers = { Content-Type = "application/json", Location = "/api/users/3" }
+
+# PUT method example
+[endpoint.update-user]
+path = "api/users/1"
+method = "PUT"
+status_code = 200
+response_body = """{"id": 1, "name": "Updated User", "updated": true}"""
+headers = { Content-Type = "application/json" }
+
+# DELETE method example
+[endpoint.delete-user]
+path = "api/users/2"
+method = "DELETE"
+status_code = 204
+response_body = ""
+
+# Method-agnostic endpoint (matches any HTTP method)
+[endpoint.hello-world]
+path = "hello"
+status_code = 200
+response_body = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Hello from Mirror!</h1>
+    <p>This is an example HTML response that works with any HTTP method.</p>
+</body>
+</html>
+"""
+headers = { Content-Type = "text/html" }
+
+# Error response
+[endpoint.not-found]
+path = "api/not-found"
+status_code = 404
+response_body = """{"error": "Resource not found", "code": "NOT_FOUND"}"""
+headers = { Content-Type = "application/json" }
+
+# Flaky service with 50% failure rate
+[endpoint.flaky-service]
+path = "api/flaky"
+method = "GET"
+status_code = 200
+response_body = """{"status": "success", "message": "This works half the time"}"""
+headers = { Content-Type = "application/json" }
+failure_rate = 0.5
+failure_status = 503
+failure_message = """{"error": "Service Temporarily Unavailable", "retry_after": 5}"""
+
+# Authentication error
+[endpoint.auth-error]
+path = "api/secure"
+status_code = 401
+response_body = """{"error": "Unauthorized", "message": "Authentication required"}"""
+headers = { Content-Type = "application/json", WWW-Authenticate = "Bearer" }
